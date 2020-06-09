@@ -1,13 +1,21 @@
-Spree::StoreController::THEME_VIEW_LOAD_PATH = File.join(Spree::Theme::CURRENT_THEME_PATH, 'views')
+require 'spree/theme'
+require 'spree/themes_template'
+
+Spree::StoreController::THEME_VIEW_LOAD_PATH = File.join(
+  Spree::Theme::CURRENT_THEME_PATH, 'views')
 
 module Spree
-  StoreController.class_eval do
+  module StoreControllerDecorator
 
-    fragment_cache_key Spree::ThemesTemplate::CacheResolver::FRAGMENT_CACHE_KEY
+    def self.prepended(base)
+      base.fragment_cache_key Spree::ThemesTemplate::CacheResolver::FRAGMENT_CACHE_KEY
 
-    before_action :set_view_path
+      base.before_action :set_view_path
 
-    before_action :set_preview_theme, if: [:preview_mode?, :preview_theme]
+      base.before_action :set_preview_theme, if: [:preview_mode?, :preview_theme]
+
+      base.helper_method :preview_mode?
+    end
 
     private
 
@@ -18,7 +26,6 @@ module Spree
       def preview_mode?
         cookies[:preview].present?
       end
-      helper_method :preview_mode?
 
       def set_view_path
         path = preview_mode? ? theme_preview_path : Spree::StoreController::THEME_VIEW_LOAD_PATH
@@ -35,3 +42,5 @@ module Spree
 
   end
 end
+
+Spree::StoreController.prepend(Spree::StoreControllerDecorator)

@@ -1,5 +1,8 @@
+require 'paperclip'
+
 module Spree
   class Theme < Spree::Base
+    include Paperclip::Glue
 
     DEFAULT_NAME = %w(default)
     DEFAULT_STATE = 'drafted'

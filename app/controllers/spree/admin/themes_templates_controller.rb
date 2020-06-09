@@ -1,6 +1,7 @@
 module Spree
   module Admin
     class ThemesTemplatesController < Spree::Admin::BaseController
+      helper 'spree/base'
 
       before_action :load_theme, only: [:index, :new, :create, :edit, :update]
       before_action :load_template, only: [:edit, :update]

@@ -1,3 +1,5 @@
+require 'devise'
+
 module VinsolSpreeThemes
   class Engine < Rails::Engine
     require 'spree/core'

@@ -1,6 +1,7 @@
 module Spree
   module Admin
     class ThemesController < Spree::Admin::BaseController
+      helper 'spree/base'
 
       before_action :load_theme, only: [:state_change, :destroy, :download]
       before_action :load_themes

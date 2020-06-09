@@ -1,6 +1,7 @@
 module Spree
   module Admin
     class ThemesPreviewController < Spree::Admin::BaseController
+      helper 'spree/base'
 
       skip_before_action :authorize_admin
       before_action :load_theme, only: [:show, :destroy]

@@ -2,11 +2,12 @@
 
 source "https://rubygems.org"
 
-gem "spree", github: "spree/spree", branch: "3-5-stable"
-gem "spree_auth_devise"
-gem "rubyzip", "~> 1.2.1"
+gem "spree", "~> 4.1"
+gem "spree_auth_devise", "~> 4.1"
+gem "rubyzip"
 gem "state_machine", "~> 1.2.0"
 gem "sprockets-helpers", "~> 1.2.1"
+gem "paperclip"
 gem "rails-controller-testing"
 
 gemspec path: "../"
